@@ -32,7 +32,18 @@ Como todo projeto de engenharia, este é um protótipo funcional que pode evolui
 - [ ] **Otimização de Hiperparâmetros:** Utilizar `GridSearchCV` ou `Optuna` para refinar ainda mais a acurácia do XGBoost.
 
 ---
+## Instalação e Execução
 
+Para rodar este sistema em sua máquina local, siga os passos abaixo:
+
+### 1. Requisitos Pró-Requisitos
+Certifique-se de ter o Python 3.8+ instalado. É recomendável o uso de um ambiente virtual (venv).
+
+### 2. Instalação das Dependências
+Abra o terminal na pasta do projeto e execute:
+```bash
+pip install pandas xgboost plotly ipywidgets
+```
 ##  Como Rodar
 1. Clone o repositório:
    ```bash
