@@ -48,3 +48,18 @@ pip install pandas xgboost plotly ipywidgets
 1. Clone o repositório:
    ```bash
    git clone [https://github.com/MoAbner/CardioAnalysis.git](https://github.com/MoAbner/CardioAnalysis.git)
+   
+##  Visualização do Sistema
+
+Abaixo, algumas capturas de tela do sistema em funcionamento, demonstrando a análise de dados e a interface interativa de predição:
+
+### Dashboard e Interface de Simulação
+![Interface de Teste](Imagens/Interface_de_teste.png)
+
+*Interface interativa construída com IPywidgets para simulação de cenários clínicos.*
+
+### Análise de Relevância e Tendências
+![Gráficos Parte 1](Imagens/gráficos_1.png)
+![Gráficos Parte 2](Imagens/gráficos-2.png)
+
+*Visualizações dinâmicas geradas com Plotly para identificação de padrões de sobrevivência.*
