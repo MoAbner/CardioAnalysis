@@ -1,6 +1,6 @@
 # CardioAnalysis: Suporte à Decisão Clínica
 
-Este projeto utiliza **Aprendizado de Máquina (Ensemble Learning)** para predição de risco em pacientes com insuficiência cardíaca. Desenvolvido como parte das atividades de **Engenharia de Computação na Universidade Federal de Goiás (UFG)**.
+Este projeto utiliza **Aprendizado de Máquina (Ensemble Learning)** para predição de risco em pacientes com insuficiência cardíaca.
 
 ---
 
