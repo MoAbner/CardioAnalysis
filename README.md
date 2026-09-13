@@ -1,65 +1,41 @@
-# CardioAnalysis: Suporte à Decisão Clínica
+**English** | [Português](README.pt-BR.md)
 
-Este projeto utiliza **Aprendizado de Máquina (Ensemble Learning)** para predição de risco em pacientes com insuficiência cardíaca.
+# CardioAnalysis
 
----
+An educational machine-learning notebook exploring the Heart Failure Clinical Records dataset with XGBoost, interactive visualizations and an ipywidgets interface.
 
-##  Sobre o Projeto
-O sistema processa 12 variáveis clínicas para calcular a probabilidade de óbito. Diferente de modelos "caixa-preta", este projeto foca na **interpretabilidade**, oferecendo um dashboard interativo onde o profissional de saúde pode simular cenários e visualizar os fatores de maior impacto.
+## What the project explores
 
-###  Tecnologias e Algoritmos
-- **Linguagem:** Python 3.x
-- **Modelo:** `XGBoost` (Extreme Gradient Boosting) - Escolhido pela alta eficiência em dados tabulares.
-- **Interface:** `IPywidgets` com estilização personalizada em CSS para ambiente hospitalar.
-- **Gráficos:** `Plotly Express` para visualizações dinâmicas.
+- Preparing tabular data and investigating feature relationships.
+- Training a classifier for the dataset's `DEATH_EVENT` outcome.
+- Inspecting results with Plotly and testing inputs through notebook widgets.
 
----
+**Tools:** Python · pandas · XGBoost · Plotly · ipywidgets · Jupyter.
 
-##  Principais Insights de Sobrevivência
-A análise dos pesos do modelo revelou que:
-1. **Tempo de Acompanhamento:** O maior preditor de sobrevivência. Estabilidade temporal indica resiliência biológica.
-2. **Fração de Ejeção:** Essencial para a saúde mecânica do miocárdio (alvos > 50%).
-3. **Creatinina Sérica:** Principal marcador do eixo cardiorrenal; valores elevados (< 1.1 mg/dL) são alertas críticos de falha sistêmica.
+## Run locally
 
----
-
-##  O que pode ser melhorado?
-Como todo projeto de engenharia, este é um protótipo funcional que pode evoluir:
-
-- [ ] **Ponderação de Idade:** Implementar uma trava de risco para pacientes idosos, evitando que um "Tempo de Acompanhamento" alto mascare o risco biológico da idade avançada.
-- [ ] **Engenharia de Features:** Criar variáveis combinadas (ex: produto entre Idade e Creatinina) para capturar melhor a fragilidade renal.
-- [ ] **Persistência de Dados:** Conectar o dashboard a um banco de dados SQL para salvar o histórico de simulações.
-- [ ] **Otimização de Hiperparâmetros:** Utilizar `GridSearchCV` ou `Optuna` para refinar ainda mais a acurácia do XGBoost.
-
----
-## Instalação e Execução
-
-Para rodar este sistema em sua máquina local, siga os passos abaixo:
-
-### 1. Requisitos Pró-Requisitos
-Certifique-se de ter o Python 3.8+ instalado. É recomendável o uso de um ambiente virtual (venv).
-
-### 2. Instalação das Dependências
-Abra o terminal na pasta do projeto e execute:
 ```bash
-pip install pandas xgboost plotly ipywidgets
+git clone https://github.com/MoAbner/CardioAnalysis.git
+cd CardioAnalysis
+python -m venv .venv
 ```
-##  Como Rodar
-1. Clone o repositório:
-   ```bash
-   git clone [https://github.com/MoAbner/CardioAnalysis.git](https://github.com/MoAbner/CardioAnalysis.git)
-   
-##  Visualização do Sistema
 
-Abaixo, algumas capturas de tela do sistema em funcionamento, demonstrando a análise de dados e a interface interativa de predição:
+Activate the environment, then install the recorded dependencies and the notebook interface:
 
-### Dashboard e Interface de Simulação
-![Interface de Teste](Imagens/Interface_de_teste.png)
+```bash
+python -m pip install -r requirements.txt
+python -m pip install jupyter
+python -m notebook
+```
 
-*Interface interativa construída com IPywidgets para simulação de cenários clínicos.*
+Open [HealthCare_Prediction.ipynb](HealthCare_Prediction.ipynb), check the dataset path and run the cells in order. The repository includes `heart_failure_clinical_records_dataset.csv`. Widget rendering requires a compatible notebook frontend.
 
-### Análise de Relevância e Tendências
-![Gráficos Parte 1](Imagens/gráficos_1.png)
-![Gráficos Parte 2](Imagens/gráficos-2.png)
+## Scope and interpretation
 
-*Visualizações dinâmicas geradas com Plotly para identificação de padrões de sobrevivência.*
+This is an exploratory learning project, not a clinically validated prediction tool. Outputs and feature associations should not be presented as diagnoses, treatment advice or evidence of clinical effectiveness.
+
+For future evaluation, document the train/test split, check for data leakage and whether each feature would be available at the intended prediction time, and report performance on held-out data. In particular, review how follow-up time is used before interpreting predictions prospectively.
+
+## Possible next steps
+
+Reproducible evaluation, hyperparameter comparison and clearer documentation of preprocessing and model limitations.
