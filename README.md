@@ -2,40 +2,46 @@
 
 # CardioAnalysis
 
-An educational machine-learning notebook exploring the Heart Failure Clinical Records dataset with XGBoost, interactive visualizations and an ipywidgets interface.
+Modular machine-learning application for the Heart Failure Clinical Records
+dataset. It preserves the notebook's tabular XGBoost/Random Forest workflow and
+exposes the final XGBoost model through a reusable Python class and FastAPI.
 
-## What the project explores
+This is an educational project, not a clinically validated diagnostic tool.
+Review the prospective use of the follow-up `time` feature before deployment.
 
-- Preparing tabular data and investigating feature relationships.
-- Training a classifier for the dataset's `DEATH_EVENT` outcome.
-- Inspecting results with Plotly and testing inputs through notebook widgets.
-
-**Tools:** Python · pandas · XGBoost · Plotly · ipywidgets · Jupyter.
-
-## Run locally
+## Setup and training
 
 ```bash
-git clone https://github.com/MoAbner/CardioAnalysis.git
-cd CardioAnalysis
 python -m venv .venv
+# Activate the environment, then:
+python -m pip install -e ".[test]"
+cardio-train --data heart_failure_clinical_records_dataset.csv \
+  --model artifacts/model.joblib --metrics artifacts/metrics.json
 ```
 
-Activate the environment, then install the recorded dependencies and the notebook interface:
+Run the end-to-end smoke test with `python scripts/test_pipeline.py` or `pytest`.
+
+## Python integration
+
+```python
+from cardio_analysis import HeartFailurePredictor
+
+predictor = HeartFailurePredictor.from_file("artifacts/model.joblib")
+result = predictor.predict(patient_dict)
+```
+
+`patient_dict` must contain the 12 original CSV feature names. The result
+contains the predicted class plus survival and death probabilities. Load one
+predictor at application startup and reuse it across requests.
+
+## HTTP API
 
 ```bash
-python -m pip install -r requirements.txt
-python -m pip install jupyter
-python -m notebook
+uvicorn cardio_analysis.api:app --host 0.0.0.0 --port 8000
 ```
 
-Open [HealthCare_Prediction.ipynb](HealthCare_Prediction.ipynb), check the dataset path and run the cells in order. The repository includes `heart_failure_clinical_records_dataset.csv`. Widget rendering requires a compatible notebook frontend.
-
-## Scope and interpretation
-
-This is an exploratory learning project, not a clinically validated prediction tool. Outputs and feature associations should not be presented as diagnoses, treatment advice or evidence of clinical effectiveness.
-
-For future evaluation, document the train/test split, check for data leakage and whether each feature would be available at the intended prediction time, and report performance on held-out data. In particular, review how follow-up time is used before interpreting predictions prospectively.
-
-## Possible next steps
-
-Reproducible evaluation, hyperparameter comparison and clearer documentation of preprocessing and model limitations.
+The API reads `artifacts/model.joblib` by default; override it with
+`CARDIO_MODEL_PATH`. Open `/docs` for the schema, call `GET /health` for artifact
+availability, and `POST /predict` for inference. See
+[the Portuguese guide](README.pt-BR.md) for the full payload, project structure,
+and continuous-retraining guidance.

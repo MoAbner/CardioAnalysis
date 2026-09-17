@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cardio-analysis"
+version = "1.0.0"
+description = "Pipeline reproduzivel de treinamento e inferencia para o Heart Failure Clinical Records dataset"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.141.1",
+    "joblib==1.6.0",
+    "numpy==2.4.6",
+    "pandas==2.3.3",
+    "pydantic==2.13.5",
+    "scikit-learn==1.9.1",
+    "uvicorn[standard]==0.53.0",
+    "xgboost==3.2.0",
+]
+
+[project.optional-dependencies]
+notebook = ["ipywidgets>=8,<9", "jupyter>=1,<2", "plotly>=5,<7", "shap>=0.44,<1"]
+test = ["httpx==0.28.1", "pytest==8.4.2"]
+
+[project.scripts]
+cardio-train = "cardio_analysis.training:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
